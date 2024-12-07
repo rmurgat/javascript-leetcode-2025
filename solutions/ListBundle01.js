@@ -30,4 +30,48 @@ export default class ListBundle01 {
         return null;
     };
 
+    containsDuplicate_1 = function(nums) {
+        let set1 = new Set(nums);
+        return set1.size !== nums.length;
+    };
+
+    containsDuplicate_2 = function(nums) {
+        let memo = [];
+        let L = nums.length;
+        for(let i=0; i<L; i++) {
+            if(memo.indexOf(nums[i])>-1) 
+                return true;
+            memo.push(nums[i]);
+        }
+        return false;
+    };
+
+    containsDuplicate_3 = function(nums) {
+        nums.sort();
+        for (let i=1; i<nums.length; i++) 
+            if(nums[i]===nums[i-1]) 
+                return true;
+        return false;
+    }
+
+    isAnagram = function(s, t) {
+        let memo = {}
+        for(let i=0; i<s.length; i++) {
+            if(memo.hasOwnProperty(s[i])) 
+                memo[s[i]]++;
+            else
+                memo[s[i]] = 1;
+        }
+        for(let i=0; i<t.length; i++) {
+            if(memo.hasOwnProperty(t[i])) 
+                memo[t[i]]--;
+            else
+            memo[t[i]] = 1
+        }
+        for(let key in Object.getOwnPropertyDescriptors(memo)) {
+            if(memo[key]!=0) return false;
+        }
+        return true;
+    }
+
 }
